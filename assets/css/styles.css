@@ -58,38 +58,23 @@ body {
   gap: 0.75rem;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--accent-color);
+  color: var(--primary-text);
   text-decoration: none;
   transition: var(--transition);
-  width: 200px;
-}
-
-.logo img{
-    width: 100%;
-    height: auto;
 }
 
 .logo:hover {
-  color: var(--hover-color);
+  color: var(--accent-color);
 }
 
 .logo-image {
-  height: 60px;
+  height: 50px;
   width: auto;
 }
 
 .logo-text {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
-}
-
-/* Hide logo text when logo-only class is applied */
-.logo.logo-only .logo-text {
-  display: none;
-}
-
-.logo.logo-only .logo-image {
-  height: 60px;
 }
 
 .nav-menu {
@@ -286,6 +271,9 @@ body {
   font-weight: 700;
   margin-bottom: 1.5rem;
   color: var(--primary-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .about-content p {
@@ -323,14 +311,19 @@ body {
 }
 
 .about-image {
-  background-color: var(--border-color);
+  background-color: var(--primary-bg);
   border-radius: 1rem;
-  height: 400px;
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--medium-gray);
-  font-size: 1.1rem;
+  box-shadow: var(--shadow-light);
+}
+
+.about-logo-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Contact Section */
@@ -363,7 +356,8 @@ body {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid var(--border-color);
@@ -372,13 +366,26 @@ body {
   font-size: 1rem;
   transition: var(--transition);
   background-color: var(--primary-bg);
+  color: var(--primary-text);
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: var(--accent-color);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236B7280'%3E%3Cpath d='M7,10L12,15L17,10H7Z' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.5em;
+  padding-right: 3rem; /* Make space for the arrow */
 }
 
 .form-group textarea {
@@ -462,57 +469,6 @@ body {
   color: var(--medium-gray);
   margin-bottom: 0.5rem;
   line-height: 1.6;
-}
-
-/* Key Contacts Section */
-.key-contacts {
-  padding: 6rem 2rem;
-  background-color: var(--light-gray);
-}
-
-.contacts-container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.contacts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.contact-card {
-  background-color: var(--primary-bg);
-  border-radius: 1rem;
-  padding: 2rem;
-  text-align: center;
-  box-shadow: var(--shadow-light);
-  transition: var(--transition);
-}
-
-.contact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-medium);
-}
-
-.contact-info h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--primary-text);
-  margin-bottom: 0.5rem;
-}
-
-.contact-title {
-  color: var(--accent-color);
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.contact-phone,
-.contact-email {
-  color: var(--medium-gray);
-  margin-bottom: 0.5rem;
 }
 
 /* Footer */
@@ -662,7 +618,8 @@ body {
   }
   
   .about-content h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    white-space: nowrap;
   }
   
   .navbar {
