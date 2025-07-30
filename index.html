@@ -22,8 +22,9 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="icon" type="image/png" href="assets/images/FavIcon.png">
     <link rel="canonical" href="https://press1.dev/">
+    <script type="text/javascript" src="assets/js/main.js"></script>
 
-</head>
+    </head>
 <body>
     <!-- Header -->
     <header class="header">
@@ -154,8 +155,13 @@
         <div class="contact-container">
             <h2 class="section-title">Get In Touch</h2>
             <p class="section-subtitle">Ready to start your next project? Let's discuss how we can help transform your business with cutting-edge technology solutions.</p>
-            
-            <form class="contact-form" id="contactForm">
+                            
+                <form method="POST" class="contact-form" id="contactForm">
+                <!-- Replace with your Access Key -->
+                <input type="hidden" name="access_key" value="0e5fbf57-8c57-4ff1-8045-d98d0bc5ae51">
+                
+                <!-- <input type="hidden" name="subject" value="Important from Press1, someone wants to contact you."> -->
+                                
                 <div class="form-group">
                     <label for="name">Full Name *</label>
                     <input type="text" id="name" name="name" required>
@@ -205,6 +211,9 @@
                 </div>
                 
                 <button type="submit" class="submit-button">Send Message</button>
+                
+                <!--Response-->
+                <div id="result"></div>
             </form>
         </div>
     </section>
@@ -250,7 +259,5 @@
             </div>
         </div>
     </footer>
-
-    <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -54,44 +54,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Contact form handling
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const formObject = {};
-            formData.forEach((value, key) => {
-                formObject[key] = value;
-            });
+const form = document.getElementById('contactForm');
+const result = document.getElementById('result');
+    
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+   
+    const formData = new FormData(form);
+    
+    // Get the name input value
+    const name = formData.get('name');
 
-            // Basic form validation
-            if (!validateForm(formObject)) {
-                return;
-            }
+    // Create a custom subject
+    const subject = `${name} sent a message from Press1 website.`;
 
-            // Show loading state
-            const submitButton = this.querySelector('.submit-button');
-            const originalText = submitButton.textContent;
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
+    // Append the custom subject to the form data
+    formData.append('subject', subject);
 
-            // Simulate form submission (replace with actual API call)
-            setTimeout(() => {
-                // Reset form
-                this.reset();
-                
-                // Show success message
-                showNotification('Thank you! Your message has been sent successfully. We\'ll get back to you soon.', 'success');
-                
-                // Reset button
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            }, 2000);
-        });
-    }
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+    
+    result.innerHTML = "Please wait...";
+
+    //fetch result
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: json
+    })
+    .then(async (response) => { //show response
+        let json = await response.json();
+        if (response.status == 200) {
+            // result.innerHTML = json.message;
+        } else {
+            console.log(response);
+            result.innerHTML = json.message;
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        result.innerHTML = "Something went wrong!";
+    })
+    .then(function() { //reset form
+        form.reset();
+        showNotification('Thank you! Your message has been sent successfully. We\'ll get back to you soon.', 'success');
+        setTimeout(() => {
+            result.style.display = "none";
+        }, 3000);
+    }); 
+});
 
     // Form validation function
     function validateForm(data) {
